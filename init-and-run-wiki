@@ -25,6 +25,11 @@ fi
 if [ -n "$USERNAME" ]; then
   listen_params="$listen_params username=$USERNAME"
   listen_params="$listen_params password=${PASSWORD-wiki}"
+  listen_params="$listen_params admin=$USERNAME"
+  listen_params="$listen_params 'writers=(authenticated)'"
+  if [ -n "$ANON" ]; then
+    listen_params="$listen_params 'readers=(anon)'"
+  fi
 fi
 
 # Start the tiddlywiki server

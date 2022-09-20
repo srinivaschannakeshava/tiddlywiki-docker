@@ -1,0 +1,73 @@
+# Default values for tiddlywiki.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: srini91/tiddlywiki
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "1.0.0_v5_2_3_armv7"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+
+podAnnotations: {}
+
+podSecurityContext: 
+   fsGroup: 1001
+
+securityContext: 
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+   runAsNonRoot: true
+   runAsUser: 1001
+
+# If you have to run on specific node
+nodeSelector:
+  dedicated: rabbitmq
+
+service:
+  type: ClusterIP
+  port: 8888
+  targetPort: 8080
+
+nodeService:
+  externalPort: 8888
+  internalPort: 8080
+  name: http-port
+  nodePort: 30888
+  type: NodePort
+
+
+resources: 
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+secret:
+  PATH_PREFIX: 
+  USERNAME: 
+  PASSWORD: 
+  ANON: 
+
+volumeMounts:
+   mountPath: /var/lib/tiddlywiki
+
+ingress:
+  enabled: true

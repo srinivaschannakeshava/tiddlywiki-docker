@@ -5,16 +5,15 @@ Run TiddlyWiki 5 via Docker.
 Forked from
 [djmaze/tiddlywiki-docker](https://github.com/djmaze/tiddlywiki-docker).
 
-The Docker image is available at [m0wer/tiddlywiki - Docker
-Hub](https://hub.docker.com/r/m0wer/tiddlywiki).
+The Docker image is available at [srini91/tiddlywiki - Docker
+Hub](https://hub.docker.com/r/srini91/tiddlywiki).
 
 ## Available Docker Images at DockerHub
 
-Image Name       | Tag        | TiddyWiki Version
------------------|------------|------------------
-m0wer/tiddlywiki | latest     | 5.2.0
-m0wer/tiddlywiki | v[X]       | [X]
-m0wer/tiddlywiki | test       | ?
+Image Name         | Tag                | TiddyWiki Version
+-------------------|--------------------|------------------
+srini91/tiddlywiki | 1.0.0_v5_2_3       | 5.2.3
+srini91/tiddlywiki | 1.0.0_v5_2_3_armv7 | 5.2.3
 
 ## Prerequisites
 
@@ -23,7 +22,7 @@ m0wer/tiddlywiki | test       | ?
 ## Quickstart
 
 ```bash
-docker run -d -p 8080:8080 m0wer/tiddlywiki
+docker run -d -p 8080:8080 srini91/tiddlywiki:1.0.0_v5_2_3
 ```
 
 Now TiddlyWiki should be running on
@@ -35,7 +34,7 @@ The container uses a Docker volume to save the wiki data. In order not
 to lose sight of that, I recommend using a local directory for the volume.
 
 ```bash
-docker run -d -p 8080:8080 -v $(pwd)/.tiddlywiki:/var/lib/tiddlywiki m0wer/tiddlywiki
+docker run -d -p 8080:8080 -v $(pwd)/.tiddlywiki:/var/lib/tiddlywiki srini91/tiddlywiki:1.0.0_v5_2_3
 ```
 
 In this example, the folder `$(pwd)/.tiddlywiki` is used for the data.
@@ -65,3 +64,7 @@ serving TiddlyWiki. For example by passing `-e PATH_PREFIX=\wiki` option in
 configure the client as well.
 
 [path-prefix-note]: https://tiddlywiki.com/static/Using%2520a%2520custom%2520path%2520prefix%2520with%2520the%2520client-server%2520edition.html
+
+### ANON
+
+SET the `ANON` env variable to true for readers to be able to access the wiki in case of authentication is enabled
